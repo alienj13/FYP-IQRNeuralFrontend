@@ -1,0 +1,9 @@
+<linker>
+	<assembly fullname="endel.nativewebsocket" ignoreIfMissing="1">
+		<type fullname="Main">
+			<method name="clear"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress2"/>
+		</type>
+	</assembly>
+</linker>
