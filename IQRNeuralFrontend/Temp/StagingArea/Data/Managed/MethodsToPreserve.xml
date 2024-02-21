@@ -5,5 +5,17 @@
 			<method name="OnButtonPress"/>
 			<method name="OnButtonPress2"/>
 		</type>
+		<type fullname="UIHoverEffect">
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+		</type>
 	</assembly>
 </linker>

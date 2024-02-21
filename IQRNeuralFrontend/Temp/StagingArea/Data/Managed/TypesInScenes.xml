@@ -2,7 +2,25 @@
 	<assembly fullname="endel.nativewebsocket">
 		<type fullname="CameraController" preserve="nothing"/>
 		<type fullname="Main" preserve="nothing"/>
+		<type fullname="UIHoverEffect" preserve="nothing"/>
 		<type fullname="WebSocketConnection" preserve="nothing"/>
+	</assembly>
+	<assembly fullname="Unity.Postprocessing.Runtime">
+		<type fullname="UnityEngine.Rendering.PostProcessing.AmbientOcclusion" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.AutoExposure" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.Bloom" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.ChromaticAberration" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.ColorGrading" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.DepthOfField" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.Grain" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.LensDistortion" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.MotionBlur" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.PostProcessLayer" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.PostProcessProfile" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.PostProcessResources" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.PostProcessVolume" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.ScreenSpaceReflections" preserve="nothing"/>
+		<type fullname="UnityEngine.Rendering.PostProcessing.Vignette" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Unity.TextMeshPro">
 		<type fullname="TMPro.TextMeshProUGUI" preserve="nothing"/>
@@ -25,13 +43,13 @@
 		<type fullname="UnityEngine.AudioBehaviour" preserve="nothing"/>
 		<type fullname="UnityEngine.AudioListener" preserve="nothing"/>
 		<type fullname="UnityEngine.Behaviour" preserve="nothing"/>
-		<type fullname="UnityEngine.BoxCollider" preserve="nothing"/>
 		<type fullname="UnityEngine.Camera" preserve="nothing"/>
 		<type fullname="UnityEngine.Canvas" preserve="nothing"/>
 		<type fullname="UnityEngine.CanvasRenderer" preserve="nothing"/>
 		<type fullname="UnityEngine.CapsuleCollider" preserve="nothing"/>
 		<type fullname="UnityEngine.Collider" preserve="nothing"/>
 		<type fullname="UnityEngine.Component" preserve="nothing"/>
+		<type fullname="UnityEngine.ComputeShader" preserve="nothing"/>
 		<type fullname="UnityEngine.Cubemap" preserve="nothing"/>
 		<type fullname="UnityEngine.Font" preserve="nothing"/>
 		<type fullname="UnityEngine.GameObject" preserve="nothing"/>
@@ -58,6 +76,7 @@
 	</assembly>
 	<assembly fullname="UnityEngine.UI">
 		<type fullname="UnityEngine.EventSystems.EventSystem" preserve="nothing"/>
+		<type fullname="UnityEngine.EventSystems.EventTrigger" preserve="nothing"/>
 		<type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Button" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.CanvasScaler" preserve="nothing"/>

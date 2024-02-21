@@ -26,7 +26,7 @@ public class Main : MonoBehaviour
         Instance = this;
     }
 
-    public Vector3 GetCubePosition(int pos, float cubeSize, float cubeHeight)
+    public Vector3 GetNeuronPosition(int pos, float cubeSize, float cubeHeight)
     {
         if (pos == 0)
             return new Vector3(0, 0, 0);
@@ -61,7 +61,7 @@ public class Main : MonoBehaviour
         float poleOffset = 0.9f;
         float theta = ((i + poleOffset) / ((float)(rows - 1) + (2 * poleOffset))) * Mathf.PI;
 
-        Vector3 v = GetCubePosition(pos, 2000, 2000);
+        Vector3 v = GetNeuronPosition(pos, 2000, 2000);
         Vector3 position;
 
         if (pos == 0)
@@ -89,14 +89,18 @@ public class Main : MonoBehaviour
             renderer.material = instanceMaterial;
         }
 
+        Vector3 directionToCenter = -position.normalized;
+    neuron.transform.rotation = Quaternion.LookRotation(directionToCenter);
+   
+
         return neuron;
     }
 
 
     public GameObject CreateConnection(int sourcePos, int targetPos)
     {
-        Vector3 sourcePosition = GetCubePosition(sourcePos, 2000, 2000);
-        Vector3 targetPosition = GetCubePosition(targetPos, 2000, 2000);
+        Vector3 sourcePosition = GetNeuronPosition(sourcePos, 2000, 2000);
+        Vector3 targetPosition = GetNeuronPosition(targetPos, 2000, 2000);
         Vector3 midpoint = (sourcePosition + targetPosition) / 2f;
 
         GameObject connection = GameObject.Instantiate(connectionPrefab, midpoint, Quaternion.identity);
@@ -111,7 +115,7 @@ public class Main : MonoBehaviour
     public GameObject CreateDendrite(GameObject n, int targetPos)
     {
         Vector3 sourcePosition = n.transform.position;
-        Vector3 targetPosition = GetCubePosition(targetPos, 2000, 2000);
+        Vector3 targetPosition = GetNeuronPosition(targetPos, 2000, 2000);
         Vector3 midpoint = (sourcePosition + targetPosition) / 2f;
 
         GameObject dendrite = GameObject.Instantiate(dendritePrefab, midpoint, Quaternion.identity);
