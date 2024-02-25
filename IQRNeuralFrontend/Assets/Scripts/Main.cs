@@ -89,10 +89,10 @@ public class Main : MonoBehaviour
             renderer.material = instanceMaterial;
         }
 
-        Vector3 directionToCenter = -position.normalized;
-    neuron.transform.rotation = Quaternion.LookRotation(directionToCenter);
-   
-
+  
+        Vector3 directionToCenter = (v - neuron.transform.position).normalized;
+        neuron.transform.rotation = Quaternion.LookRotation(-directionToCenter);
+        neuron.transform.Rotate(90f, 0f, 0f, Space.Self);
         return neuron;
     }
 
@@ -137,7 +137,12 @@ public class Main : MonoBehaviour
         }
     }
 
-    public void OnButtonPress() { PromptFileUpload(); }
+    public void OnButtonPress() {
+    
+       // UnityEditorTest();
+    
+         PromptFileUpload();
+          }
 
     [DllImport("__Internal")]
     private static extern void PromptFileUpload();
@@ -150,6 +155,74 @@ public class Main : MonoBehaviour
             play = !play;
         }
     }
+
+
+public void UnityEditorTest()
+    {
+  
+        clear();
+  
+        try
+        {
+
+            string filePath = "C:/Users/junai/eclipse-workspace/FYP/data/Test.iqr"; // Update with the correct path
+
+    
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filePath);
+            XmlNodeList groupNodes = xmlDoc.GetElementsByTagName("Group");
+            int pos = 0;
+
+            foreach (XmlNode groupNode in groupNodes)
+            {
+                XmlElement groupElement = (XmlElement)groupNode;
+
+                Debug.Log("Group: ");
+                Debug.Log("    name: " + groupElement.GetAttribute("name"));
+                Debug.Log("    ID: " + groupElement.GetAttribute("id"));
+                string Gid = groupElement.GetAttribute("id");
+                string Gname = groupElement.GetAttribute("name");
+
+                XmlElement topologyRect = (XmlElement)groupElement.GetElementsByTagName("TopologyRect")[0];
+                Debug.Log("    Neuron X: " + topologyRect.GetAttribute("hcount"));
+                Debug.Log("    Neuron Y: " + topologyRect.GetAttribute("vcount"));
+                int xCount = int.Parse(topologyRect.GetAttribute("hcount"));
+                string yCount = topologyRect.GetAttribute("vcount");
+
+                XmlElement neurons = (XmlElement)groupElement.GetElementsByTagName("Neuron")[0];
+                Debug.Log("    Neuron name: " + neurons.GetAttribute("name"));
+                Groups.Add(new Group(Gid, Gname, xCount, int.Parse(yCount), pos));
+                pos++;
+            }
+                
+            groupNodes = xmlDoc.GetElementsByTagName("Connection");
+
+            foreach (XmlNode groupNode in groupNodes)
+            {
+                XmlElement groupElement = (XmlElement)groupNode;
+                Debug.Log("    ID: " + groupElement.GetAttribute("id"));
+                string id = groupElement.GetAttribute("id");
+
+                Debug.Log("    type: " + groupElement.GetAttribute("type"));
+                string type = groupElement.GetAttribute("type");
+                Debug.Log("    source: " + groupElement.GetAttribute("source"));
+                Debug.Log("    target: " + groupElement.GetAttribute("target"));
+                Group[] TS = findGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
+
+                Synapse s = new Synapse(id, type, TS[0], TS[1]);
+                TS[0].addConnection(s);
+                TS[1].addConnection(s);
+
+            }
+            play = false;
+            load = true;
+        }
+        catch (XmlException xmlEx)
+        {
+            Debug.LogError("XML Exception: " + xmlEx.Message);
+        }
+    }
+
 
     public void ReceiveFileContent(string Contents)
     {
