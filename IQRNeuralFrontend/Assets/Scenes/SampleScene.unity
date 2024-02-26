@@ -332,6 +332,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: untitled
       objectReference: {fileID: 0}
+    - target: {fileID: 1291640279554957050, guid: b08e2c79a78256b4d93f3a9028ee7e4a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291640279554957050, guid: b08e2c79a78256b4d93f3a9028ee7e4a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de81ec28056eaa945802abac07a3e578, type: 2}
+    - target: {fileID: 1291640279554957050, guid: b08e2c79a78256b4d93f3a9028ee7e4a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: de81ec28056eaa945802abac07a3e578, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -348,6 +360,7 @@ GameObject:
   - component: {fileID: 219088940}
   - component: {fileID: 219088939}
   - component: {fileID: 219088941}
+  - component: {fileID: 219088942}
   m_Layer: 0
   m_Name: FileHandler
   m_TagString: Untagged
@@ -369,11 +382,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   load: 0
   play: 0
-  neuronPrefab: {fileID: 787056320184991535, guid: b08e2c79a78256b4d93f3a9028ee7e4a, type: 3}
+  done: 0
+  neuronPrefab: {fileID: 8545903646845432615, guid: 9de1e05cc88f76043b36ddf454f8fad1, type: 3}
   connectionPrefab: {fileID: 2782823086665565106, guid: 3f9034063587c7d4893718637a4e31b7, type: 3}
   dendritePrefab: {fileID: 5576515728146260696, guid: 893c08bcea6faae49b1fc21fc754594b, type: 3}
   on: {fileID: 2100000, guid: e05e5ea174ee0cf42b4d370ec04a09ff, type: 2}
   off: {fileID: 2100000, guid: fb19e2c8e92907d4190496f0f3378fde, type: 2}
+  stat: {fileID: 8545903646845432615, guid: 9de1e05cc88f76043b36ddf454f8fad1, type: 3}
 --- !u!4 &219088940
 Transform:
   m_ObjectHideFlags: 0
@@ -401,6 +416,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0182910ac47792b4996d7cfa99c0ad04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &219088942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219088938}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0d7ce7e782dbe429f7e9ebc9709a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  j: {fileID: 8545903646845432615, guid: 9de1e05cc88f76043b36ddf454f8fad1, type: 3}
 --- !u!1 &223974226
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +464,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.4279785, y: -0.030029297}
+  m_AnchoredPosition: {x: -1.4277344, y: -0.030029297}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &223974228
@@ -1545,7 +1573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.05}
   m_AnchorMax: {x: 0.24, y: 0.3}
-  m_AnchoredPosition: {x: 7.998535, y: 2.5}
+  m_AnchoredPosition: {x: 7.9975586, y: 2.5}
   m_SizeDelta: {x: 50, y: 411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1577749885

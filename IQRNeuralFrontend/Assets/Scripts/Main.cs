@@ -14,11 +14,13 @@ public class Main : MonoBehaviour
     public static List<Group> Groups = new List<Group>();
     public bool load = false;
     public bool play = false;
+    public bool done = false;
     public GameObject neuronPrefab;
     public GameObject connectionPrefab;
     public GameObject dendritePrefab;
     public Material on;
     public Material off;
+    public GameObject stat;
     public static Main Instance { get; private set; }
 
     void Awake()
@@ -82,12 +84,12 @@ public class Main : MonoBehaviour
         }
 
         GameObject neuron = Instantiate(neuronPrefab, position + v, Quaternion.identity, transform);
-        MeshRenderer renderer = neuronPrefab.GetComponent<MeshRenderer>();
-        if (renderer != null)
-        {
-            Material instanceMaterial = new Material(off);
-            renderer.material = instanceMaterial;
-        }
+        // MeshRenderer renderer = neuronPrefab.GetComponent<MeshRenderer>();
+        // if (renderer != null)
+        // {
+        //     Material instanceMaterial = new Material(off);
+        //     renderer.material = instanceMaterial;
+        // }
 
   
         Vector3 directionToCenter = (v - neuron.transform.position).normalized;
@@ -125,7 +127,10 @@ public class Main : MonoBehaviour
 
         return dendrite;
     }
-
+    public void AnimationOn(GameObject neuron){
+          AnimationEmissionController scriptInstance = neuron.GetComponent<AnimationEmissionController>();
+           StartCoroutine(scriptInstance.ChangeEmissionIntensity());
+    }
     void Update()
     {
         if (load && play && Groups[0].getDataLength() > 0)
@@ -133,13 +138,13 @@ public class Main : MonoBehaviour
             foreach (Group g in Groups)
             {
                 g.Start();
-            }
+            }done = true;
         }
     }
 
     public void OnButtonPress() {
     
-       // UnityEditorTest();
+       //UnityEditorTest();
     
          PromptFileUpload();
           }

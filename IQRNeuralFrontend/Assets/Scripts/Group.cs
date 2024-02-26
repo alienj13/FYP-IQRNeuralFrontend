@@ -79,7 +79,7 @@ public string getName(){
 
     public void Start()
     {
-        Main.Instance.Turnoff(cubes, xcount, ycount);
+        //Main.Instance.Turnoff(cubes, xcount, ycount);
         Main.Instance.Turnoff(dendrites, xcount, ycount);
         test = new int[xcount, ycount];
 
@@ -97,7 +97,13 @@ public string getName(){
             if (test[rand, rand2] == 0)
             {
                 test[rand, rand2] = 1;
-                Main.Instance.Turnon(cubes[rand, rand2]);
+                //Main.Instance.Turnon(cubes[rand, rand2]);
+               //AnimationEmissionController scriptInstance = cubes[rand, rand2].GetComponent<AnimationEmissionController>();
+               
+                //Debug.Log(scriptInstance.ChangeEmissionIntensity());
+               
+                //StartCoroutine(scriptInstance.ChangeEmissionIntensity());
+                Main.Instance.AnimationOn(cubes[rand, rand2]);
                 Main.Instance.Turnon(dendrites[rand, rand2]);
                 count--;
             }
