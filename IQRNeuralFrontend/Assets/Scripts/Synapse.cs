@@ -24,8 +24,21 @@ public class Synapse
         connection = Main.Instance.CreateConnection(source.getPos(), target.getPos());
     }
 
-public GameObject getConnection(){
-    return connection;
-}
+    public GameObject getConnection()
+    {
+        return connection;
+    }
+
+    public Group getSource()
+    {
+        return source;
+    }
+
+    public Group getTarget()
+    {
+        return target;
+    }
+
+   
 
 }

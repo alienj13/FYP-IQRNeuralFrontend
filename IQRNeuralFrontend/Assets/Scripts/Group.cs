@@ -1,29 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Xml;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using UnityEngine.UI;
+using System.Runtime.InteropServices;
+using System;
 public class Group : MonoBehaviour
 {
     private string Name { get; }
     // private Neuron[][] neurons;
     private int[,] test;
     private GameObject[,] cubes;
-     private GameObject[,] dendrites;
+    private GameObject[,] dendrites;
     private string id;
     private List<double> data = new List<double>();
+    private List<double> Animationdata = new List<double>();
     private List<Synapse> connections = new List<Synapse>();
+    private List<Group> Targets = new List<Group>();
     private int xcount;
     private int ycount;
     System.Random random = new System.Random();
     private int pos;
-
     private Vector3 centerPosition;
+
 
 
     public Group(string id, string name, int xcount, int ycount, int pos)
     {
         cubes = new GameObject[xcount, ycount];
-        dendrites = new GameObject[xcount, ycount];
+        // dendrites = new GameObject[xcount, ycount];
 
         this.pos = pos;
         this.id = id;
@@ -32,30 +40,33 @@ public class Group : MonoBehaviour
         test = new int[xcount, ycount];
         this.xcount = xcount;
         this.ycount = ycount;
- 
+
         for (int i = 0; i < xcount; i++)
         {
             for (int j = 0; j < ycount; j++)
             {
-                cubes[i, j] = Main.Instance.createNeuron(pos, i, j, xcount,ycount);
-                dendrites[i, j] = Main.Instance.CreateDendrite(cubes[i,j],pos);
+                cubes[i, j] = Main.Instance.createNeuron(pos, i, j, xcount, ycount);
+                //dendrites[i, j] = Main.Instance.CreateDendrite(cubes[i,j],pos);
             }
         }
-         
+
     }
 
-  
-public string getID(){
-    return id;
-}
 
-public int getPos(){
-    return pos;
-}
+    public string getID()
+    {
+        return id;
+    }
 
-public string getName(){
-    return Name;
-}
+    public int getPos()
+    {
+        return pos;
+    }
+
+    public string getName()
+    {
+        return Name;
+    }
 
     public void addData(double d)
     {
@@ -67,59 +78,58 @@ public string getName(){
         return data.Count;
     }
 
-    public List<double> getData()
+    public double getData()
     {
-        return data;
-    }
-
- public void addConnection(Synapse s)
-    {
-        connections.Add(s);
-    }
-
-    public void Start()
-    {
-        //Main.Instance.Turnoff(cubes, xcount, ycount);
-        Main.Instance.Turnoff(dendrites, xcount, ycount);
-        test = new int[xcount, ycount];
-
         double probability = data[0];
         data.RemoveAt(0);
-
-        int count = (int)(test.Length * probability);
-
-        Debug.Log("Number of neurons firing: " + count + "   " + id + "  " + probability);
-        while (count > 0)
-        {
-            int rand = random.Next(test.GetLength(1));
-            int rand2 = random.Next(test.GetLength(1));
-
-            if (test[rand, rand2] == 0)
-            {
-                test[rand, rand2] = 1;
-                //Main.Instance.Turnon(cubes[rand, rand2]);
-               //AnimationEmissionController scriptInstance = cubes[rand, rand2].GetComponent<AnimationEmissionController>();
-               
-                //Debug.Log(scriptInstance.ChangeEmissionIntensity());
-               
-                //StartCoroutine(scriptInstance.ChangeEmissionIntensity());
-                Main.Instance.AnimationOn(cubes[rand, rand2]);
-                Main.Instance.Turnon(dendrites[rand, rand2]);
-                count--;
-            }
-        }
-
+        return probability;
     }
 
-    public void desroyGroup(){
+    public double getAnimationData()
+    {
+        double probability = data[0];
+        data.RemoveAt(0);
+        return probability;
+    }
 
-        foreach(Synapse obj in connections){
+    public void addConnection(Synapse s)
+    {
+        connections.Add(s);
+        Targets.Add(s.getTarget());
+    }
+
+    public GameObject[,] getNeurons()
+    {
+        return cubes;
+    }
+
+    public void StartSimulation()
+    {
+        List<Synapse> synapses = new List<Synapse>();
+        foreach (Synapse s in connections)
+        {
+            if (s.getSource().getID().Equals(id))
+            {
+                synapses.Add(s);
+                
+            }
+        }
+        AnimationSequence.Instance.AnimationStart(synapses,Targets);
+    }
+
+    public void desroyGroup()
+    {
+
+        foreach (Synapse obj in connections)
+        {
             Destroy(obj.getConnection());
         }
-        foreach(GameObject obj in cubes){
+        foreach (GameObject obj in cubes)
+        {
             Destroy(obj);
         }
-        foreach(GameObject obj in dendrites){
+        foreach (GameObject obj in dendrites)
+        {
             Destroy(obj);
         }
 

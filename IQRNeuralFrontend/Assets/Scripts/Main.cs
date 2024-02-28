@@ -12,6 +12,7 @@ using System;
 public class Main : MonoBehaviour
 {
     public static List<Group> Groups = new List<Group>();
+    public static List<Group> SourceGroups = new List<Group>();
     public bool load = false;
     public bool play = false;
     public bool done = false;
@@ -57,7 +58,7 @@ public class Main : MonoBehaviour
 
     public GameObject createNeuron(int pos, int i, int j, int rows, int cols)
     {
-     
+
         int posnew = pos * 1500;
         float phi = (j / (float)(cols - 1)) * 2 * Mathf.PI;
         float poleOffset = 0.9f;
@@ -91,13 +92,12 @@ public class Main : MonoBehaviour
         //     renderer.material = instanceMaterial;
         // }
 
-  
+
         Vector3 directionToCenter = (v - neuron.transform.position).normalized;
         neuron.transform.rotation = Quaternion.LookRotation(-directionToCenter);
         neuron.transform.Rotate(90f, 0f, 0f, Space.Self);
         return neuron;
     }
-
 
     public GameObject CreateConnection(int sourcePos, int targetPos)
     {
@@ -108,7 +108,7 @@ public class Main : MonoBehaviour
         GameObject connection = GameObject.Instantiate(connectionPrefab, midpoint, Quaternion.identity);
 
         float distance = Vector3.Distance(sourcePosition, targetPosition);
-        connection.transform.localScale = new Vector3(connection.transform.localScale.x / 2f, distance / 2f, connection.transform.localScale.z/2f);
+        connection.transform.localScale = new Vector3(connection.transform.localScale.x / 2f, distance / 2f, connection.transform.localScale.z / 2f);
         connection.transform.up = targetPosition - sourcePosition;
 
         return connection;
@@ -127,31 +127,30 @@ public class Main : MonoBehaviour
 
         return dendrite;
     }
-    public void AnimationOn(GameObject neuron){
-          AnimationEmissionController scriptInstance = neuron.GetComponent<AnimationEmissionController>();
-           StartCoroutine(scriptInstance.ChangeEmissionIntensity());
-    }
+
+
     void Update()
     {
-        if (load && play && Groups[0].getDataLength() > 0)
+        if (load && play && SourceGroups[0].getDataLength() > 0 && !done)
         {
-            foreach (Group g in Groups)
+            foreach (Group g in SourceGroups)
             {
-                g.Start();
-            }done = true;
+                g.StartSimulation();
+            }
+          //  done = true;
         }
     }
 
-    public void OnButtonPress() {
-    
-       //UnityEditorTest();
-    
-         PromptFileUpload();
-          }
+    public void OnButtonPress()
+    {
+
+        //UnityEditorTest();
+
+        PromptFileUpload();
+    }
 
     [DllImport("__Internal")]
     private static extern void PromptFileUpload();
-
 
     public void OnButtonPress2()
     {
@@ -161,18 +160,14 @@ public class Main : MonoBehaviour
         }
     }
 
-
-public void UnityEditorTest()
+    public void UnityEditorTest()
     {
-  
         clear();
-  
+
         try
         {
 
             string filePath = "C:/Users/junai/eclipse-workspace/FYP/data/Test.iqr"; // Update with the correct path
-
-    
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filePath);
             XmlNodeList groupNodes = xmlDoc.GetElementsByTagName("Group");
@@ -199,7 +194,7 @@ public void UnityEditorTest()
                 Groups.Add(new Group(Gid, Gname, xCount, int.Parse(yCount), pos));
                 pos++;
             }
-                
+
             groupNodes = xmlDoc.GetElementsByTagName("Connection");
 
             foreach (XmlNode groupNode in groupNodes)
@@ -217,8 +212,11 @@ public void UnityEditorTest()
                 Synapse s = new Synapse(id, type, TS[0], TS[1]);
                 TS[0].addConnection(s);
                 TS[1].addConnection(s);
-
+                if (!SourceGroups.Contains(TS[0])) { 
+                    SourceGroups.Add(TS[0]);
+                }
             }
+            Debug.Log(SourceGroups.Count);
             play = false;
             load = true;
         }
@@ -228,12 +226,11 @@ public void UnityEditorTest()
         }
     }
 
-
     public void ReceiveFileContent(string Contents)
     {
-  
+
         clear();
-  
+
         try
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -262,7 +259,7 @@ public void UnityEditorTest()
                 Groups.Add(new Group(Gid, Gname, xCount, int.Parse(yCount), pos));
                 pos++;
             }
-                
+
             groupNodes = xmlDoc.GetElementsByTagName("Connection");
 
             foreach (XmlNode groupNode in groupNodes)
@@ -280,7 +277,10 @@ public void UnityEditorTest()
                 Synapse s = new Synapse(id, type, TS[0], TS[1]);
                 TS[0].addConnection(s);
                 TS[1].addConnection(s);
-
+                if (!SourceGroups.Contains(TS[0]))
+                {
+                    SourceGroups.Add(TS[0]);
+                }
             }
             play = false;
             load = true;
@@ -290,7 +290,6 @@ public void UnityEditorTest()
             Debug.LogError("XML Exception: " + xmlEx.Message);
         }
     }
-
 
     public void SortData(string data)
     {
@@ -317,33 +316,6 @@ public void UnityEditorTest()
             }
         }
     }
-
-    public void Turnon(GameObject o)
-    {
-        MeshRenderer renderer = o.GetComponent<MeshRenderer>();
-        if (renderer != null)
-        {
-            Material instanceMaterial = new Material(on);
-            renderer.material = instanceMaterial;
-        }
-    }
-
-    public void Turnoff(GameObject[,] o, int xcount, int ycount)
-    {
-        for (int i = 0; i < xcount; i++)
-        {
-            for (int j = 0; j < ycount; j++)
-            {
-                MeshRenderer renderer = o[i, j].GetComponent<MeshRenderer>();
-                if (renderer != null)
-                {
-                    Material instanceMaterial = new Material(off);
-                    renderer.material = instanceMaterial;
-                }
-            }
-        }
-    }
-
 
     public Group[] findGroups(string source, string target)
     {
@@ -372,6 +344,6 @@ public void UnityEditorTest()
             group.desroyGroup();
         }
         Groups = new List<Group>();
-        
+
     }
 }

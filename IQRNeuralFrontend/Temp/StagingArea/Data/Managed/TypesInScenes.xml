@@ -2,7 +2,9 @@
 	<assembly fullname="endel.nativewebsocket">
 		<type fullname="animate" preserve="nothing"/>
 		<type fullname="AnimationEmissionController" preserve="nothing"/>
+		<type fullname="AnimationSequence" preserve="nothing"/>
 		<type fullname="CameraController" preserve="nothing"/>
+		<type fullname="connectionremap" preserve="nothing"/>
 		<type fullname="Main" preserve="nothing"/>
 		<type fullname="ReMap" preserve="nothing"/>
 		<type fullname="UIHoverEffect" preserve="nothing"/>

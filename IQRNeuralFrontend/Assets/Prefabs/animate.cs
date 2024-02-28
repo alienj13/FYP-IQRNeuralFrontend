@@ -13,7 +13,7 @@ public class animate : MonoBehaviour
 
         GameObject neuron = Instantiate(j, new Vector3(0,0,0), Quaternion.identity, transform);
           scriptInstance = neuron.GetComponent<AnimationEmissionController>();
-           StartCoroutine(scriptInstance.ChangeEmissionIntensity());
+           //StartCoroutine(scriptInstance.ChangeEmissionIntensity());
          
     }
 

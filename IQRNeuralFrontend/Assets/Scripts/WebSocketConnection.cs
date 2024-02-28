@@ -17,7 +17,7 @@ public class WebSocketConnection : MonoBehaviour
 
         websocket.OnMessage += (bytes) =>
         {
-            Debug.Log("Received OnMessage!");
+            //Debug.Log("Received OnMessage!");
             string receivedData = Encoding.UTF8.GetString(bytes);
             if(Main.Instance.play){
             Main.Instance.SortData(receivedData);
