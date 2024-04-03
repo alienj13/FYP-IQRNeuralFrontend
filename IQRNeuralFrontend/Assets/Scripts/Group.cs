@@ -8,36 +8,35 @@ using System.Text;
 using UnityEngine.UI;
 using System.Runtime.InteropServices;
 using System;
-public class Group : MonoBehaviour
+public class Group 
 {
-    private string Name { get; }
-    // private Neuron[][] neurons;
-    private int[,] test;
-    private GameObject[,] cubes;
+    private string Name;
+
+   private GameObject[,] Neurons;//neuron gameobjects
     private GameObject[,] dendrites;
-    private string id;
-    private List<double> data = new List<double>();
-    private List<double> Animationdata = new List<double>();
-    private List<Synapse> connections = new List<Synapse>();
+    private string id;//identify unique groups
+
+    private List<int[,]> NeuronProbabilityMatrix = new List<int[,]>();
+    private List<Texture2D> SpacePlots = new List<Texture2D>();
+    private List<int[,]> AxonProbabilityMatrix = new List<int[,]>();
+    private List<Synapse> Synapses = new List<Synapse>();
     private List<Group> Targets = new List<Group>();
     private int xcount;
     private int ycount;
     System.Random random = new System.Random();
-    private int pos;
-    private Vector3 centerPosition;
+    private int Position;
+    private Texture2D CurrentSpacePlot;
 
 
 
-    public Group(string id, string name, int xcount, int ycount, int pos)
+    public Group(string id, string name, int xcount, int ycount, int Position)
     {
-        cubes = new GameObject[xcount, ycount];
-        // dendrites = new GameObject[xcount, ycount];
+        Neurons = new GameObject[xcount, ycount];
+         dendrites = new GameObject[xcount, ycount];
 
-        this.pos = pos;
+        this.Position = Position;
         this.id = id;
         this.Name = name;
-        // neurons = new Neuron[xcount][ycount];
-        test = new int[xcount, ycount];
         this.xcount = xcount;
         this.ycount = ycount;
 
@@ -45,11 +44,13 @@ public class Group : MonoBehaviour
         {
             for (int j = 0; j < ycount; j++)
             {
-                cubes[i, j] = Main.Instance.createNeuron(pos, i, j, xcount, ycount);
-                //dendrites[i, j] = Main.Instance.CreateDendrite(cubes[i,j],pos);
+                GameObject neuronObj = Main.Instance.CreateNeuron(Position, i, j, xcount, ycount);
+                Neuron neuronScript = neuronObj.GetComponent<Neuron>(); // Adds the Neuron component
+                neuronScript.Initialize(this); // Passes the current group instance to the Neuron
+                Neurons[i, j] = neuronObj;
+                dendrites[i, j] = Main.Instance.CreateDendrite(Neurons[i,j],Position);
             }
         }
-
     }
 
 
@@ -60,7 +61,7 @@ public class Group : MonoBehaviour
 
     public int getPos()
     {
-        return pos;
+        return Position;
     }
 
     public string getName()
@@ -70,43 +71,91 @@ public class Group : MonoBehaviour
 
     public void addData(double d)
     {
-        data.Add(d);
+    Texture2D SpacePlot = new Texture2D(Neurons.GetLength(0), Neurons.GetLength(1));
+    int[,] probabilityGrid = new int[Neurons.GetLength(0), Neurons.GetLength(1)];
+        System.Random random = new System.Random();
+        double probability = d;
+        int count = (int)(probabilityGrid.Length * probability);
+
+        while (count > 0)
+        {
+            int rand = random.Next(probabilityGrid.GetLength(1));
+            int rand2 = random.Next(probabilityGrid.GetLength(1));
+
+            if (probabilityGrid[rand, rand2] == 0)
+            {
+                probabilityGrid[rand, rand2] = 1;
+                count--;
+                SpacePlot.SetPixel(rand, rand2, Color.red );
+            }
+        }
+
+
+        for (int i = 0; i < probabilityGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < probabilityGrid.GetLength(1); j++)
+            {
+                if (probabilityGrid[i, j] == 0)
+                {
+                    SpacePlot.SetPixel(i, j, Color.black);
+                }
+            }
+        }
+        SpacePlot.Apply();
+        SpacePlot.filterMode = FilterMode.Point;
+
+        SpacePlots.Add(SpacePlot);
+        NeuronProbabilityMatrix.Add(probabilityGrid);
+        AxonProbabilityMatrix.Add(probabilityGrid); ;
+
     }
+
 
     public int getDataLength()
     {
-        return data.Count;
+        return NeuronProbabilityMatrix.Count;
     }
 
-    public double getData()
-    {
-        double probability = data[0];
-        data.RemoveAt(0);
-        return probability;
+    public Texture2D GetSpacePlot() {
+        return CurrentSpacePlot;
     }
 
-    public double getAnimationData()
+    public int[,] getNeuronMatrix()
     {
-        double probability = data[0];
-        data.RemoveAt(0);
-        return probability;
+        int[,] matrix = NeuronProbabilityMatrix[0];
+        NeuronProbabilityMatrix.RemoveAt(0);
+        CurrentSpacePlot = SpacePlots[0];
+        SpacePlots.RemoveAt(0);
+        return matrix;
     }
 
-    public void addConnection(Synapse s)
+    public int[,] getAxonMatrix()
     {
-        connections.Add(s);
+        int[,] matrix = AxonProbabilityMatrix[0];
+        AxonProbabilityMatrix.RemoveAt(0);
+        return matrix;
+    }
+
+    public void addSynapse(Synapse s)
+    {
+        Synapses.Add(s);
         Targets.Add(s.getTarget());
     }
 
     public GameObject[,] getNeurons()
     {
-        return cubes;
+        return Neurons;
+    }
+
+    public GameObject[,] getDendrites()
+    {
+        return dendrites;
     }
 
     public void StartSimulation()
     {
         List<Synapse> synapses = new List<Synapse>();
-        foreach (Synapse s in connections)
+        foreach (Synapse s in Synapses)
         {
             if (s.getSource().getID().Equals(id))
             {
@@ -117,21 +166,5 @@ public class Group : MonoBehaviour
         AnimationSequence.Instance.AnimationStart(synapses,Targets);
     }
 
-    public void desroyGroup()
-    {
-
-        foreach (Synapse obj in connections)
-        {
-            Destroy(obj.getConnection());
-        }
-        foreach (GameObject obj in cubes)
-        {
-            Destroy(obj);
-        }
-        foreach (GameObject obj in dendrites)
-        {
-            Destroy(obj);
-        }
-
-    }
+    
 }

@@ -29,6 +29,8 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    Unity.Timeline.Editor.dll:
+    - TimelineProjectSettings
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -47,10 +49,13 @@ ScriptsOnlyBuild:
     - AnimationSequence
     - CameraController
     - Main
+    - Neuron
     - ReMap
+    - UI
     - UIHoverEffect
     - WebSocketConnection
     - animate
+    - axonremap
     - connectionremap
   serializedClasses:
     Unity.Postprocessing.Runtime:
@@ -106,20 +111,26 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.SpriteState
   methodsToPreserve:
   - assembly: endel.nativewebsocket
-    fullTypeName: Main
-    methodName: OnButtonPress2
+    fullTypeName: Neuron
+    methodName: UpdatePlot
   - assembly: endel.nativewebsocket
     fullTypeName: Main
-    methodName: clear
+    methodName: Play
   - assembly: endel.nativewebsocket
     fullTypeName: Main
-    methodName: OnButtonPress
+    methodName: Clear
+  - assembly: endel.nativewebsocket
+    fullTypeName: Main
+    methodName: Upload
   - assembly: endel.nativewebsocket
     fullTypeName: UIHoverEffect
     methodName: OnButtonPress
   - assembly: endel.nativewebsocket
     fullTypeName: UIHoverEffect
     methodName: OnButtonPress2
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: set_isStatic
   - assembly: endel.nativewebsocket
     fullTypeName: UIHoverEffect
     methodName: OnButtonPress
@@ -179,64 +190,68 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1644}
+      Script: {instanceID: 16708}
     - Class: 114
-      Script: {instanceID: 1670}
+      Script: {instanceID: 16734}
     - Class: 114
-      Script: {instanceID: 2018}
+      Script: {instanceID: 17082}
     - Class: 114
-      Script: {instanceID: 2246}
+      Script: {instanceID: 17312}
     - Class: 114
-      Script: {instanceID: 2376}
+      Script: {instanceID: 17442}
     - Class: 114
-      Script: {instanceID: 2454}
+      Script: {instanceID: 17520}
     - Class: 114
-      Script: {instanceID: 2644}
+      Script: {instanceID: 17710}
     - Class: 114
-      Script: {instanceID: 2682}
+      Script: {instanceID: 17748}
     - Class: 114
-      Script: {instanceID: 2890}
+      Script: {instanceID: 17956}
     - Class: 114
-      Script: {instanceID: 3038}
+      Script: {instanceID: 18104}
     - Class: 114
-      Script: {instanceID: 3186}
+      Script: {instanceID: 18164}
     - Class: 114
-      Script: {instanceID: 3628}
+      Script: {instanceID: 18254}
     - Class: 114
-      Script: {instanceID: 3722}
+      Script: {instanceID: 18696}
     - Class: 114
-      Script: {instanceID: 4202}
+      Script: {instanceID: 18790}
     - Class: 114
-      Script: {instanceID: 4456}
+      Script: {instanceID: 19270}
     - Class: 114
-      Script: {instanceID: 4732}
+      Script: {instanceID: 19524}
     - Class: 114
-      Script: {instanceID: 4878}
+      Script: {instanceID: 19800}
     - Class: 114
-      Script: {instanceID: 5168}
+      Script: {instanceID: 19946}
     - Class: 114
-      Script: {instanceID: 5724}
+      Script: {instanceID: 20236}
     - Class: 114
-      Script: {instanceID: 5874}
+      Script: {instanceID: 20286}
     - Class: 114
-      Script: {instanceID: 6186}
+      Script: {instanceID: 20794}
     - Class: 114
-      Script: {instanceID: 6898}
+      Script: {instanceID: 20944}
     - Class: 114
-      Script: {instanceID: 7216}
+      Script: {instanceID: 21256}
     - Class: 114
-      Script: {instanceID: 7388}
+      Script: {instanceID: 21968}
     - Class: 114
-      Script: {instanceID: 7470}
+      Script: {instanceID: 22286}
     - Class: 114
-      Script: {instanceID: 7684}
+      Script: {instanceID: 22458}
     - Class: 114
-      Script: {instanceID: 23848}
+      Script: {instanceID: 22540}
+    - Class: 114
+      Script: {instanceID: 22754}
+    - Class: 114
+      Script: {instanceID: 27832}
+    - Class: 114
+      Script: {instanceID: 29148}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
-      Script: {instanceID: 0}
-    - Class: 136
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -326,6 +341,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: endel.nativewebsocket
+    namespaceName: 
+    className: Group
+  - hash:
+      serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnTriggerEnterMessageListener
@@ -379,7 +400,7 @@ ScriptsOnlyBuild:
     className: UnityOnBecameVisibleMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 553a00050c999e3f20cedf0ea4e2a836
+      Hash: cddc3b79795202583584ac735afedbb3
     assemblyName: endel.nativewebsocket
     namespaceName: 
     className: Main
@@ -491,6 +512,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnDropdownValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: endel.nativewebsocket
+    namespaceName: 
+    className: AnimationSequence
   - hash:
       serializedVersion: 2
       Hash: a4d905db69ca7f45f45458ae380fb66f
@@ -878,6 +905,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: endel.nativewebsocket
+    namespaceName: 
+    className: axonremap
+  - hash:
+      serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnBecameInvisibleMessageListener
@@ -1231,16 +1264,22 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 751e5bae2a317288c2ab58d66687092b
+      Hash: baa5b0f245d00b64a9872bc584efa32f
     assemblyName: endel.nativewebsocket
     namespaceName: 
-    className: Group
+    className: SpacePlot
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: endel.nativewebsocket
     namespaceName: 
-    className: AnimationSequence
+    className: Neuron
+  - hash:
+      serializedVersion: 2
+      Hash: bbd29c54428574076572ba8cb3110f1d
+    assemblyName: endel.nativewebsocket
+    namespaceName: 
+    className: UI
   platform: 20
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

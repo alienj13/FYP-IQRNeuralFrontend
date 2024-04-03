@@ -17,11 +17,8 @@ public class Main : MonoBehaviour
     public bool play = false;
     public bool done = false;
     public GameObject neuronPrefab;
-    public GameObject connectionPrefab;
+    public GameObject SynapsePrefab;
     public GameObject dendritePrefab;
-    public Material on;
-    public Material off;
-    public GameObject stat;
     public static Main Instance { get; private set; }
 
     void Awake()
@@ -56,7 +53,7 @@ public class Main : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    public GameObject createNeuron(int pos, int i, int j, int rows, int cols)
+    public GameObject CreateNeuron(int pos, int i, int j, int rows, int cols)
     {
 
         int posnew = pos * 1500;
@@ -85,27 +82,20 @@ public class Main : MonoBehaviour
         }
 
         GameObject neuron = Instantiate(neuronPrefab, position + v, Quaternion.identity, transform);
-        // MeshRenderer renderer = neuronPrefab.GetComponent<MeshRenderer>();
-        // if (renderer != null)
-        // {
-        //     Material instanceMaterial = new Material(off);
-        //     renderer.material = instanceMaterial;
-        // }
-
-
+  
         Vector3 directionToCenter = (v - neuron.transform.position).normalized;
         neuron.transform.rotation = Quaternion.LookRotation(-directionToCenter);
         neuron.transform.Rotate(90f, 0f, 0f, Space.Self);
         return neuron;
     }
 
-    public GameObject CreateConnection(int sourcePos, int targetPos)
+    public GameObject CreateSynapse(int sourcePos, int targetPos)
     {
         Vector3 sourcePosition = GetNeuronPosition(sourcePos, 2000, 2000);
         Vector3 targetPosition = GetNeuronPosition(targetPos, 2000, 2000);
         Vector3 midpoint = (sourcePosition + targetPosition) / 2f;
 
-        GameObject connection = GameObject.Instantiate(connectionPrefab, midpoint, Quaternion.identity);
+        GameObject connection = GameObject.Instantiate(SynapsePrefab, midpoint, Quaternion.identity);
 
         float distance = Vector3.Distance(sourcePosition, targetPosition);
         connection.transform.localScale = new Vector3(connection.transform.localScale.x / 2f, distance / 2f, connection.transform.localScale.z / 2f);
@@ -122,8 +112,8 @@ public class Main : MonoBehaviour
 
         GameObject dendrite = GameObject.Instantiate(dendritePrefab, midpoint, Quaternion.identity);
         float distance = Vector3.Distance(sourcePosition, targetPosition);
-        dendrite.transform.localScale = new Vector3(dendrite.transform.localScale.x / 2, distance / 2f, dendrite.transform.localScale.z);
-        dendrite.transform.up = targetPosition - sourcePosition;
+        dendrite.transform.localScale = new Vector3(dendrite.transform.localScale.x/2 , distance/2f , dendrite.transform.localScale.z/2);
+        dendrite.transform.up =   sourcePosition- targetPosition;
 
         return dendrite;
     }
@@ -141,18 +131,18 @@ public class Main : MonoBehaviour
         }
     }
 
-    public void OnButtonPress()
+    public void Upload()
     {
 
-        //UnityEditorTest();
+        UnityEditorTest();
 
-        PromptFileUpload();
+        //FileUpload();
     }
 
     [DllImport("__Internal")]
-    private static extern void PromptFileUpload();
+    private static extern void FileUpload();
 
-    public void OnButtonPress2()
+    public void Play()
     {
         if (load)
         {
@@ -162,7 +152,7 @@ public class Main : MonoBehaviour
 
     public void UnityEditorTest()
     {
-        clear();
+        Clear();
 
         try
         {
@@ -207,11 +197,11 @@ public class Main : MonoBehaviour
                 string type = groupElement.GetAttribute("type");
                 Debug.Log("    source: " + groupElement.GetAttribute("source"));
                 Debug.Log("    target: " + groupElement.GetAttribute("target"));
-                Group[] TS = findGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
+                Group[] TS = FindGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
 
                 Synapse s = new Synapse(id, type, TS[0], TS[1]);
-                TS[0].addConnection(s);
-                TS[1].addConnection(s);
+                TS[0].addSynapse(s);
+                TS[1].addSynapse(s);
                 if (!SourceGroups.Contains(TS[0])) { 
                     SourceGroups.Add(TS[0]);
                 }
@@ -229,7 +219,7 @@ public class Main : MonoBehaviour
     public void ReceiveFileContent(string Contents)
     {
 
-        clear();
+        Clear();
 
         try
         {
@@ -272,11 +262,11 @@ public class Main : MonoBehaviour
                 string type = groupElement.GetAttribute("type");
                 Debug.Log("    source: " + groupElement.GetAttribute("source"));
                 Debug.Log("    target: " + groupElement.GetAttribute("target"));
-                Group[] TS = findGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
+                Group[] TS = FindGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
 
                 Synapse s = new Synapse(id, type, TS[0], TS[1]);
-                TS[0].addConnection(s);
-                TS[1].addConnection(s);
+                TS[0].addSynapse(s);
+                TS[1].addSynapse(s);
                 if (!SourceGroups.Contains(TS[0]))
                 {
                     SourceGroups.Add(TS[0]);
@@ -317,7 +307,7 @@ public class Main : MonoBehaviour
         }
     }
 
-    public Group[] findGroups(string source, string target)
+    public Group[] FindGroups(string source, string target)
     {
         Group[] g = new Group[2];
 
@@ -336,14 +326,18 @@ public class Main : MonoBehaviour
         return g;
     }
 
-    public void clear()
+    public void Clear()
     {
         play = false;
         foreach (Group group in Groups)
         {
-            group.desroyGroup();
+            //group.desroyGroup();
         }
         Groups = new List<Group>();
 
+    }
+
+    public void test() {
+        Debug.Log("test");
     }
 }

@@ -20,9 +20,7 @@ public class AnimationSequence : MonoBehaviour
 
     }
 
-
-
-    public void AnimationOn(GameObject neuron, string state)
+    public void Play(GameObject neuron, string state)
     {
         AnimationEmissionController scriptInstance = neuron.GetComponent<AnimationEmissionController>();
         if (state.Equals("Source"))
@@ -35,81 +33,70 @@ public class AnimationSequence : MonoBehaviour
         }
     }
 
-
-
     public void AnimationStart(List<Synapse> synapses, List<Group> Targets)
     {
         StartCoroutine(SequenceAnimation(synapses[0].getSource(), synapses, Targets));
-
     }
 
     public IEnumerator SequenceAnimation(Group source, List<Synapse> Synapses, List<Group> Target)
     {
 
-        GroupAnimation(source,"Source");
+        NeuronAnimation(source, "Source");
+        yield return new WaitForSeconds(1f);
+        AxonAnimation(source, "Source");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         foreach (Synapse s in Synapses)
         {
-             AnimationOn(s.getConnection(), "Target");
+            Play(s.getConnection(), "Target");
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+
         foreach (Group g in Target)
         {
-            GroupAnimation(g, "Target");
+            AxonAnimation(g, "Target");
+        }
+        yield return new WaitForSeconds(1f);
+        foreach (Group g in Target)
+        {
+            NeuronAnimation(g, "Target");
         }
 
     }
 
-
-    public void GroupAnimation(Group g, string state)
+    public void NeuronAnimation(Group g, string state)
     {
-        System.Random random = new System.Random();
-        double probability = g.getData();
         GameObject[,] Neurons = g.getNeurons();
-        int[,] probabilityGrid = new int[Neurons.GetLength(0), Neurons.GetLength(1)];
-        Debug.Log(probability);
-        
-        int count = (int)(probabilityGrid.Length * probability);
-        //Debug.Log("Number of neurons firing: " + count + "   " + id + "  " + probability);
-        if (state.Equals("Source"))
-        {
-            while (count > 0)
-            {
-                int rand = random.Next(probabilityGrid.GetLength(1));
-                int rand2 = random.Next(probabilityGrid.GetLength(1));
+        int[,] probabilityGrid = g.getNeuronMatrix();
 
-                if (probabilityGrid[rand, rand2] == 0)
+        for (int i = 0; i < probabilityGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < probabilityGrid.GetLength(1); j++)
+            {
+                if (probabilityGrid[i, j] == 1)
                 {
-                    probabilityGrid[rand, rand2] = 1;
-                    AnimationOn(Neurons[rand, rand2], state);
-                    //Main.Instance.Turnon(dendrites[rand, rand2]);
-                    count--;
+
+                    Play(Neurons[i, j], state);
                 }
             }
-
-            return;
         }
-        else if (state.Equals("Target"))
-        {
-            while (count > 0)
-            {
-                int rand = random.Next(probabilityGrid.GetLength(1));
-                int rand2 = random.Next(probabilityGrid.GetLength(1));
-
-                if (probabilityGrid[rand, rand2] == 0)
-                {
-                    probabilityGrid[rand, rand2] = 1;
-                    AnimationOn(Neurons[rand, rand2], state);
-                    //Main.Instance.Turnon(dendrites[rand, rand2]);
-                    count--;
-                }
-            }
-            return;
-        }
-
     }
 
+    public void AxonAnimation(Group g, string state)
+    {
+        GameObject[,] Dendrites = g.getDendrites();
+        int[,] probabilityGrid = g.getAxonMatrix();
 
+        for (int i = 0; i < probabilityGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < probabilityGrid.GetLength(1); j++)
+            { 
+                if (probabilityGrid[i, j] == 1)
+                {
+                    Play(Dendrites[i, j], state);
+                }
+            }
+        }
+    }
 }

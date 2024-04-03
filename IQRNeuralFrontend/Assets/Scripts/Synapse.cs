@@ -5,23 +5,17 @@ using UnityEngine;
 public class Synapse
 {
     private string id;
-    private string type;
-    private Group target;
-    private Group source;
-
-    public bool connected;
-
+    private Group Target;
+    private Group Source;
     public GameObject connection;
 
 
     public Synapse(string id, string type, Group source, Group target)
     {
         this.id = id;
-        this.type = type;
-        this.target = target;
-        this.source = source;
-        connected = false;
-        connection = Main.Instance.CreateConnection(source.getPos(), target.getPos());
+        this.Target = target;
+        this.Source = source;
+        connection = Main.Instance.CreateSynapse(source.getPos(), target.getPos());
     }
 
     public GameObject getConnection()
@@ -31,12 +25,12 @@ public class Synapse
 
     public Group getSource()
     {
-        return source;
+        return Source;
     }
 
     public Group getTarget()
     {
-        return target;
+        return Target;
     }
 
    

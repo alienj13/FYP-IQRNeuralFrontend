@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AnimationEmissionController : MonoBehaviour
 {
-    private float duration = 0.3f;
+    private float duration = 0.01f;
     public float targetEmissionIntensity;
 
     public IEnumerator NeuronReceieveDataOn()
@@ -20,7 +20,7 @@ public class AnimationEmissionController : MonoBehaviour
             float elapsedTime = 0;
             Color baseEmissionColor = materialToChange.GetColor("_EmissionColor");
             Color targetColour = new Color(1f, 0.235f, 0.235f);
-            if (i == materialsToChange.Length / 2) { StartCoroutine(NeuronReceieveDataOff(targetColour, baseEmissionColor, 0)); }
+            if (i == materialsToChange.Length / 4) { StartCoroutine(NeuronReceieveDataOff(targetColour, baseEmissionColor, 0)); }
             while (elapsedTime < duration)
             {
                 elapsedTime += Time.deltaTime;
@@ -40,9 +40,6 @@ public class AnimationEmissionController : MonoBehaviour
             DynamicGI.SetEmissive(rendererToChange, finalColor);
         }
     }
-
-
-
 
     private IEnumerator NeuronReceieveDataOff(Color targetcol, Color baseCol, float baseintensity)
     {
@@ -70,8 +67,6 @@ public class AnimationEmissionController : MonoBehaviour
         }
 
     }
-
-
 
     public IEnumerator NeuronSendDataOn()
     {
@@ -107,10 +102,7 @@ public class AnimationEmissionController : MonoBehaviour
         }
     }
 
-
-
-
-    private IEnumerator NeuronSendDataOff(Color targetcol, Color baseCol, float baseintensity)
+    public IEnumerator NeuronSendDataOff(Color targetcol, Color baseCol, float baseintensity)
     {
         Renderer rendererToChange = GetComponent<Renderer>();
         Material[] materialsToChange = rendererToChange.materials;

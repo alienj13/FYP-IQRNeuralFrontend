@@ -1,6 +1,6 @@
 
 mergeInto(LibraryManager.library, {
-  PromptFileUpload: function () {
+  FileUpload: function () {
     var input = document.createElement('input');
     input.type = 'file';
     input.accept = '.iqr';
