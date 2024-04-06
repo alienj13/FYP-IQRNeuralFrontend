@@ -134,9 +134,9 @@ public class Main : MonoBehaviour
     public void Upload()
     {
 
-        UnityEditorTest();
+        //UnityEditorTest();
 
-        //FileUpload();
+        FileUpload();
     }
 
     [DllImport("__Internal")]

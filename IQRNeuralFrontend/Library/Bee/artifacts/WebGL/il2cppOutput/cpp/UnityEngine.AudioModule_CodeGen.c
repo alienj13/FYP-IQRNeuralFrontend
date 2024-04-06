@@ -66,9 +66,9 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[4] =
 };
 static const int32_t s_InvokerIndices[19] = 
 {
-	7320,
-	7486,
-	7486,
+	7321,
+	7487,
+	7487,
 	2312,
 	4088,
 	4171,

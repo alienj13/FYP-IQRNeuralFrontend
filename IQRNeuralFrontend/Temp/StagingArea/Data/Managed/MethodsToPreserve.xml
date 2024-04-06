@@ -1,0 +1,21 @@
+<linker>
+	<assembly fullname="endel.nativewebsocket" ignoreIfMissing="1">
+		<type fullname="Main">
+			<method name="Clear"/>
+			<method name="Play"/>
+			<method name="Upload"/>
+		</type>
+		<type fullname="UIHoverEffect">
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+			<method name="OnButtonPress2"/>
+		</type>
+	</assembly>
+</linker>

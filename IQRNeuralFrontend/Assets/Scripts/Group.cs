@@ -17,6 +17,7 @@ public class Group
     private string id;//identify unique groups
 
     private List<int[,]> NeuronProbabilityMatrix = new List<int[,]>();
+    private List<double> Data = new List<double>();
     private List<Texture2D> SpacePlots = new List<Texture2D>();
     private List<int[,]> AxonProbabilityMatrix = new List<int[,]>();
     private List<Synapse> Synapses = new List<Synapse>();
@@ -26,6 +27,7 @@ public class Group
     System.Random random = new System.Random();
     private int Position;
     private Texture2D CurrentSpacePlot;
+    private double CurrentData;
 
 
 
@@ -71,6 +73,7 @@ public class Group
 
     public void addData(double d)
     {
+        Data.Add(d);
     Texture2D SpacePlot = new Texture2D(Neurons.GetLength(0), Neurons.GetLength(1));
     int[,] probabilityGrid = new int[Neurons.GetLength(0), Neurons.GetLength(1)];
         System.Random random = new System.Random();
@@ -120,8 +123,15 @@ public class Group
         return CurrentSpacePlot;
     }
 
+    public double GetData()
+    {
+        return CurrentData;
+    }
+
     public int[,] getNeuronMatrix()
     {
+        CurrentData = Data[0];
+        Data.RemoveAt(0);
         int[,] matrix = NeuronProbabilityMatrix[0];
         NeuronProbabilityMatrix.RemoveAt(0);
         CurrentSpacePlot = SpacePlots[0];

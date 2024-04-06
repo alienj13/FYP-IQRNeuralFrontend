@@ -29,7 +29,7 @@ public class Neuron : MonoBehaviour
         {
             // Update the plot
             Debug.Log("Updating plot for group: " + group.getName());
-            UI.Instance.UpdateSpacePlot(group);
+            UI.Instance.UpdateGroup(group);
         }
     }
 }
