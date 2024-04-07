@@ -37,6 +37,7 @@ public class SpacePlot : MonoBehaviour
         spacePlotTexture.Apply();
 
         // Set the texture on the display RawImage
+        spacePlotTexture.filterMode = FilterMode.Point;
         display.texture = spacePlotTexture;
     }
 

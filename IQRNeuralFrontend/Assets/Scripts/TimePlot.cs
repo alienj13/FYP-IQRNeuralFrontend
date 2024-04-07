@@ -28,6 +28,7 @@ public class TimePlot : MonoBehaviour
         for (int i = 0; i < previousFrame.Length; i++)
             previousFrame[i] = Color.black; // Initialize the plot with the background color
 
+        plotTexture.filterMode = FilterMode.Point;
         // Start updating the plot at a regular interval
         StartCoroutine(UpdatePlotRoutine());
     }

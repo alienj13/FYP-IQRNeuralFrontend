@@ -182,6 +182,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Application_OpenURL();
 		Register_UnityEngine_Application_OpenURL();
 
+		//System.Void UnityEngine.Application::SetLogCallbackDefined(System.Boolean)
+		void Register_UnityEngine_Application_SetLogCallbackDefined();
+		Register_UnityEngine_Application_SetLogCallbackDefined();
+
 		//UnityEngine.RuntimePlatform UnityEngine.Application::get_platform()
 		void Register_UnityEngine_Application_get_platform();
 		Register_UnityEngine_Application_get_platform();

@@ -6,10 +6,12 @@
 		<type fullname="axonremap" preserve="nothing"/>
 		<type fullname="CameraController" preserve="nothing"/>
 		<type fullname="connectionremap" preserve="nothing"/>
+		<type fullname="ConsoleToUI" preserve="nothing"/>
 		<type fullname="Main" preserve="nothing"/>
 		<type fullname="Neuron" preserve="nothing"/>
 		<type fullname="NeuronClickDetector" preserve="nothing"/>
 		<type fullname="ReMap" preserve="nothing"/>
+		<type fullname="ScrollingRasterPlot" preserve="nothing"/>
 		<type fullname="SpacePlot" preserve="nothing"/>
 		<type fullname="TimePlot" preserve="nothing"/>
 		<type fullname="UI" preserve="nothing"/>

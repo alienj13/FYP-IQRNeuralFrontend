@@ -54,10 +54,12 @@ ScriptsOnlyBuild:
     - AnimationSequence
     - AxisLabelUpdater
     - CameraController
+    - ConsoleToUI
     - Main
     - Neuron
     - NeuronClickDetector
     - ReMap
+    - ScrollingRasterPlot
     - SpacePlot
     - TimePlot
     - UI
@@ -262,6 +264,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 24110}
     - Class: 114
       Script: {instanceID: 29450}
+    - Class: 114
+      Script: {instanceID: 47520}
+    - Class: 114
+      Script: {instanceID: 62922}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1001,7 +1007,7 @@ ScriptsOnlyBuild:
     className: SpacePlot
   - hash:
       serializedVersion: 2
-      Hash: bd336a2b4acf5be17321320d5adef7b4
+      Hash: 0ef3bbbd37a57fdc327f0d9d988c22fa
     assemblyName: endel.nativewebsocket
     namespaceName: 
     className: UI
@@ -1347,6 +1353,18 @@ ScriptsOnlyBuild:
     assemblyName: endel.nativewebsocket
     namespaceName: 
     className: AxisLabelUpdater
+  - hash:
+      serializedVersion: 2
+      Hash: f7d4eea98aa348de8ac9e0d6c51f176c
+    assemblyName: endel.nativewebsocket
+    namespaceName: 
+    className: ScrollingRasterPlot
+  - hash:
+      serializedVersion: 2
+      Hash: 45f9c2b8c29a99d40c3228bbd0a42a04
+    assemblyName: endel.nativewebsocket
+    namespaceName: 
+    className: ConsoleToUI
   platform: 20
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

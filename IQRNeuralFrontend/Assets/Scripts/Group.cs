@@ -28,6 +28,7 @@ public class Group
     private int Position;
     private Texture2D CurrentSpacePlot;
     private double CurrentData;
+    private int[,] CurrentMatrix;
 
 
 
@@ -133,6 +134,7 @@ public class Group
         CurrentData = Data[0];
         Data.RemoveAt(0);
         int[,] matrix = NeuronProbabilityMatrix[0];
+        CurrentMatrix = matrix;
         NeuronProbabilityMatrix.RemoveAt(0);
         CurrentSpacePlot = SpacePlots[0];
         SpacePlots.RemoveAt(0);
@@ -176,5 +178,16 @@ public class Group
         AnimationSequence.Instance.AnimationStart(synapses,Targets);
     }
 
-    
+    public int[,] getCurrentMatrix()
+    {
+        return CurrentMatrix;
+    }
+
+    public int GetY() { 
+    return ycount;
+    }
+    public int GetX()
+    { 
+    return xcount;
+    }
 }

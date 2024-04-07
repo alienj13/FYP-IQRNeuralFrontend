@@ -283,6 +283,7 @@ public class Main : MonoBehaviour
 
     public void SortData(string data)
     {
+        Debug.Log(data);
         List<double> tempData = new List<double>();
 
         string[] pairs = data.Split(';');
