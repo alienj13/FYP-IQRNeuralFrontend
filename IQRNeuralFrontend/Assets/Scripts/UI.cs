@@ -14,16 +14,12 @@ public class UI : MonoBehaviour
     public RawImage displayImage; // The RawImage component to display the plot
     private Texture2D plotTexture;
 
-  
-
     private Color[] previousFrame;
     private int lastDataHeight = 0; // Set to baseline of the plot
     private float timeSinceLastData = 0f;
     private float dataInterval = 2f; // Time in seconds between data points
     public float MinValue { get; private set; }
     public float MaxValue { get; private set; }
-
-
 
     private int neuronsCount;
     private int rasterHeight; // Height of the raster plot texture
@@ -43,8 +39,6 @@ public class UI : MonoBehaviour
 
         for (int i = 0; i < previousFrame.Length; i++)
             previousFrame[i] = Color.black;
-
-     
     }
 
     void Awake()
@@ -98,9 +92,7 @@ public class UI : MonoBehaviour
 
     private void UpdatePlotRoutine()
     {
-        
             ScrollTimeline(); // This will scroll the timeline regardless of new data
-            //yield return new WaitForSeconds(0.1f); // Update rate of the plot (10 times per second)
 
             timeSinceLastData += 0.1f;
             if (timeSinceLastData >= dataInterval)
@@ -108,7 +100,6 @@ public class UI : MonoBehaviour
                 AddDataPoint(sp.GetData());
                 timeSinceLastData = 0f;
             }
-        
     }
 
     private void ScrollTimeline()

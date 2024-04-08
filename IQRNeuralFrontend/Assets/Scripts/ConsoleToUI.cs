@@ -24,7 +24,7 @@ public class ConsoleToUI : MonoBehaviour
         logQueue.Enqueue(logString + "\n");
 
         // Optional: Choose how many lines of log you want to display
-        if (logQueue.Count > 10) // For example, limit to 10 lines
+        if (logQueue.Count >25) // For example, limit to 10 lines
         {
             logQueue.Dequeue(); // Remove the oldest line
         }

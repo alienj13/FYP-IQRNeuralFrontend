@@ -134,9 +134,9 @@ public class Main : MonoBehaviour
     public void Upload()
     {
 
-        //UnityEditorTest();
+        UnityEditorTest();
 
-        FileUpload();
+        //FileUpload();
     }
 
     [DllImport("__Internal")]
@@ -156,7 +156,6 @@ public class Main : MonoBehaviour
 
         try
         {
-
             string filePath = "C:/Users/junai/eclipse-workspace/FYP/data/Test.iqr"; // Update with the correct path
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filePath);
@@ -192,11 +191,8 @@ public class Main : MonoBehaviour
                 XmlElement groupElement = (XmlElement)groupNode;
                 Debug.Log("    ID: " + groupElement.GetAttribute("id"));
                 string id = groupElement.GetAttribute("id");
-
                 Debug.Log("    type: " + groupElement.GetAttribute("type"));
                 string type = groupElement.GetAttribute("type");
-                Debug.Log("    source: " + groupElement.GetAttribute("source"));
-                Debug.Log("    target: " + groupElement.GetAttribute("target"));
                 Group[] TS = FindGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
 
                 Synapse s = new Synapse(id, type, TS[0], TS[1]);
@@ -255,13 +251,9 @@ public class Main : MonoBehaviour
             foreach (XmlNode groupNode in groupNodes)
             {
                 XmlElement groupElement = (XmlElement)groupNode;
-                Debug.Log("    ID: " + groupElement.GetAttribute("id"));
                 string id = groupElement.GetAttribute("id");
-
                 Debug.Log("    type: " + groupElement.GetAttribute("type"));
                 string type = groupElement.GetAttribute("type");
-                Debug.Log("    source: " + groupElement.GetAttribute("source"));
-                Debug.Log("    target: " + groupElement.GetAttribute("target"));
                 Group[] TS = FindGroups(groupElement.GetAttribute("source"), groupElement.GetAttribute("target"));
 
                 Synapse s = new Synapse(id, type, TS[0], TS[1]);
@@ -283,13 +275,15 @@ public class Main : MonoBehaviour
 
     public void SortData(string data)
     {
-        Debug.Log(data);
+        
         List<double> tempData = new List<double>();
 
         string[] pairs = data.Split(';');
 
         for (int i = 0; i < pairs.Length - 1; i++)
         {
+            Debug.Log(pairs[i]);
+            
             string[] parts = pairs[i].Split(':');
             string id = parts[0];
 
@@ -306,6 +300,7 @@ public class Main : MonoBehaviour
                 }
             }
         }
+        Debug.Log(" ");
     }
 
     public Group[] FindGroups(string source, string target)
@@ -336,9 +331,5 @@ public class Main : MonoBehaviour
         }
         Groups = new List<Group>();
 
-    }
-
-    public void test() {
-        Debug.Log("test");
     }
 }

@@ -5540,7 +5540,7 @@ IL_0019:
 		float L_16 = V_0;
 		int32_t L_17 = V_1;
 		float L_18 = __this->___axisLength;
-		V_6 = ((float)il2cpp_codegen_subtract(((float)il2cpp_codegen_multiply(L_16, ((float)L_17))), ((float)(L_18/(2.0f)))));
+		V_6 = ((float)il2cpp_codegen_subtract(((float)il2cpp_codegen_multiply(L_16, ((float)L_17))), ((float)(L_18/(1.79999995f)))));
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_19 = V_4;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_20 = V_5;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_21;
@@ -8471,64 +8471,67 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Main_SortData_m54DA9EC62CFE8B51BB13E9BA7
 	bool V_9 = false;
 	bool V_10 = false;
 	{
-		String_t* L_0 = ___0_data;
-		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_0, NULL);
-		List_1_t495F03F47D827883530F951D563C0BB7340E5995* L_1 = (List_1_t495F03F47D827883530F951D563C0BB7340E5995*)il2cpp_codegen_object_new(List_1_t495F03F47D827883530F951D563C0BB7340E5995_il2cpp_TypeInfo_var);
-		List_1__ctor_m4F495AFEC1141AA7E02729E3105CB569F2CEAD34(L_1, List_1__ctor_m4F495AFEC1141AA7E02729E3105CB569F2CEAD34_RuntimeMethod_var);
-		V_0 = L_1;
-		String_t* L_2 = ___0_data;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_3;
-		L_3 = String_Split_m9530B73D02054692283BF35C3A27C8F2230946F4(L_2, ((int32_t)59), 0, NULL);
-		V_1 = L_3;
+		List_1_t495F03F47D827883530F951D563C0BB7340E5995* L_0 = (List_1_t495F03F47D827883530F951D563C0BB7340E5995*)il2cpp_codegen_object_new(List_1_t495F03F47D827883530F951D563C0BB7340E5995_il2cpp_TypeInfo_var);
+		List_1__ctor_m4F495AFEC1141AA7E02729E3105CB569F2CEAD34(L_0, List_1__ctor_m4F495AFEC1141AA7E02729E3105CB569F2CEAD34_RuntimeMethod_var);
+		V_0 = L_0;
+		String_t* L_1 = ___0_data;
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_2;
+		L_2 = String_Split_m9530B73D02054692283BF35C3A27C8F2230946F4(L_1, ((int32_t)59), 0, NULL);
+		V_1 = L_2;
 		V_2 = 0;
-		goto IL_00b4;
+		goto IL_00b6;
 	}
 
-IL_001f:
+IL_0018:
 	{
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_4 = V_1;
-		int32_t L_5 = V_2;
-		int32_t L_6 = L_5;
-		String_t* L_7 = (L_4)->GetAtUnchecked(static_cast<il2cpp_array_size_t>(L_6));
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_8;
-		L_8 = String_Split_m9530B73D02054692283BF35C3A27C8F2230946F4(L_7, ((int32_t)58), 0, NULL);
-		V_3 = L_8;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_9 = V_3;
-		int32_t L_10 = 0;
-		String_t* L_11 = (L_9)->GetAtUnchecked(static_cast<il2cpp_array_size_t>(L_10));
-		V_4 = L_11;
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_3 = V_1;
+		int32_t L_4 = V_2;
+		int32_t L_5 = L_4;
+		String_t* L_6 = (L_3)->GetAtUnchecked(static_cast<il2cpp_array_size_t>(L_5));
+		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
+		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_6, NULL);
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_7 = V_1;
+		int32_t L_8 = V_2;
+		int32_t L_9 = L_8;
+		String_t* L_10 = (L_7)->GetAtUnchecked(static_cast<il2cpp_array_size_t>(L_9));
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_11;
+		L_11 = String_Split_m9530B73D02054692283BF35C3A27C8F2230946F4(L_10, ((int32_t)58), 0, NULL);
+		V_3 = L_11;
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_12 = V_3;
-		int32_t L_13 = 1;
+		int32_t L_13 = 0;
 		String_t* L_14 = (L_12)->GetAtUnchecked(static_cast<il2cpp_array_size_t>(L_13));
-		double L_15;
-		L_15 = Double_Parse_mEBC644CE0C86A405283EC4839F872EF9E556670A(L_14, NULL);
-		V_5 = L_15;
-		double L_16 = V_5;
-		V_6 = (bool)((((double)L_16) > ((double)(1.0)))? 1 : 0);
-		bool L_17 = V_6;
-		if (!L_17)
+		V_4 = L_14;
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_15 = V_3;
+		int32_t L_16 = 1;
+		String_t* L_17 = (L_15)->GetAtUnchecked(static_cast<il2cpp_array_size_t>(L_16));
+		double L_18;
+		L_18 = Double_Parse_mEBC644CE0C86A405283EC4839F872EF9E556670A(L_17, NULL);
+		V_5 = L_18;
+		double L_19 = V_5;
+		V_6 = (bool)((((double)L_19) > ((double)(1.0)))? 1 : 0);
+		bool L_20 = V_6;
+		if (!L_20)
 		{
-			goto IL_005b;
+			goto IL_005d;
 		}
 	}
 	{
 		V_5 = (1.0);
 	}
 
-IL_005b:
+IL_005d:
 	{
 		il2cpp_codegen_runtime_class_init_inline(Main_tB2BD4ED993D6F90E6554CF85083255E6CE0D3846_il2cpp_TypeInfo_var);
-		List_1_t5DDA1AA14CACB342F663A7D819CE17E34DBCBDA9* L_18 = ((Main_tB2BD4ED993D6F90E6554CF85083255E6CE0D3846_StaticFields*)il2cpp_codegen_static_fields_for(Main_tB2BD4ED993D6F90E6554CF85083255E6CE0D3846_il2cpp_TypeInfo_var))->___Groups;
-		Enumerator_tFEE3D7D93E1E885A1D7E0851FC5C780F0E38E080 L_19;
-		L_19 = List_1_GetEnumerator_mFA17E92E1BA394AE749555681C025565EF3EFB51(L_18, List_1_GetEnumerator_mFA17E92E1BA394AE749555681C025565EF3EFB51_RuntimeMethod_var);
-		V_7 = L_19;
+		List_1_t5DDA1AA14CACB342F663A7D819CE17E34DBCBDA9* L_21 = ((Main_tB2BD4ED993D6F90E6554CF85083255E6CE0D3846_StaticFields*)il2cpp_codegen_static_fields_for(Main_tB2BD4ED993D6F90E6554CF85083255E6CE0D3846_il2cpp_TypeInfo_var))->___Groups;
+		Enumerator_tFEE3D7D93E1E885A1D7E0851FC5C780F0E38E080 L_22;
+		L_22 = List_1_GetEnumerator_mFA17E92E1BA394AE749555681C025565EF3EFB51(L_21, List_1_GetEnumerator_mFA17E92E1BA394AE749555681C025565EF3EFB51_RuntimeMethod_var);
+		V_7 = L_22;
 	}
 	{
 		auto __finallyBlock = il2cpp::utils::Finally([&]
 		{
 
-FINALLY_00a0:
+FINALLY_00a2:
 			{
 				Enumerator_Dispose_m245004597A7B35F88612142B9AF8EEED471C324A((&V_7), Enumerator_Dispose_m245004597A7B35F88612142B9AF8EEED471C324A_RuntimeMethod_var);
 				return;
@@ -8537,48 +8540,48 @@ FINALLY_00a0:
 		try
 		{
 			{
-				goto IL_0095_1;
+				goto IL_0097_1;
 			}
 
-IL_006a_1:
+IL_006c_1:
 			{
-				Group_t894A755F412A9052235B8C6388247A8930ABBEF8* L_20;
-				L_20 = Enumerator_get_Current_m31490EAB3242B4ABADA2BCF0FCC06E8E507FF0FD_inline((&V_7), Enumerator_get_Current_m31490EAB3242B4ABADA2BCF0FCC06E8E507FF0FD_RuntimeMethod_var);
-				V_8 = L_20;
-				Group_t894A755F412A9052235B8C6388247A8930ABBEF8* L_21 = V_8;
-				String_t* L_22;
-				L_22 = Group_getID_mDF0777A71D799CAA6CBC9CB77A1326774BB44EE9(L_21, NULL);
-				String_t* L_23 = V_4;
-				bool L_24;
-				L_24 = String_Equals_mCD5F35DEDCAFE51ACD4E033726FC2EF8DF7E9B4D(L_22, L_23, NULL);
-				V_9 = L_24;
-				bool L_25 = V_9;
-				if (!L_25)
+				Group_t894A755F412A9052235B8C6388247A8930ABBEF8* L_23;
+				L_23 = Enumerator_get_Current_m31490EAB3242B4ABADA2BCF0FCC06E8E507FF0FD_inline((&V_7), Enumerator_get_Current_m31490EAB3242B4ABADA2BCF0FCC06E8E507FF0FD_RuntimeMethod_var);
+				V_8 = L_23;
+				Group_t894A755F412A9052235B8C6388247A8930ABBEF8* L_24 = V_8;
+				String_t* L_25;
+				L_25 = Group_getID_mDF0777A71D799CAA6CBC9CB77A1326774BB44EE9(L_24, NULL);
+				String_t* L_26 = V_4;
+				bool L_27;
+				L_27 = String_Equals_mCD5F35DEDCAFE51ACD4E033726FC2EF8DF7E9B4D(L_25, L_26, NULL);
+				V_9 = L_27;
+				bool L_28 = V_9;
+				if (!L_28)
 				{
-					goto IL_0094_1;
+					goto IL_0096_1;
 				}
 			}
 			{
-				Group_t894A755F412A9052235B8C6388247A8930ABBEF8* L_26 = V_8;
-				double L_27 = V_5;
-				Group_addData_m927F574BEB8ADDA4A3B157D6EF6F051AA11E6CD4(L_26, L_27, NULL);
+				Group_t894A755F412A9052235B8C6388247A8930ABBEF8* L_29 = V_8;
+				double L_30 = V_5;
+				Group_addData_m927F574BEB8ADDA4A3B157D6EF6F051AA11E6CD4(L_29, L_30, NULL);
 			}
 
-IL_0094_1:
+IL_0096_1:
 			{
 			}
 
-IL_0095_1:
+IL_0097_1:
 			{
-				bool L_28;
-				L_28 = Enumerator_MoveNext_m02E8705757912BB0FA11DA0C2BA08B559E7EE6ED((&V_7), Enumerator_MoveNext_m02E8705757912BB0FA11DA0C2BA08B559E7EE6ED_RuntimeMethod_var);
-				if (L_28)
+				bool L_31;
+				L_31 = Enumerator_MoveNext_m02E8705757912BB0FA11DA0C2BA08B559E7EE6ED((&V_7), Enumerator_MoveNext_m02E8705757912BB0FA11DA0C2BA08B559E7EE6ED_RuntimeMethod_var);
+				if (L_31)
 				{
-					goto IL_006a_1;
+					goto IL_006c_1;
 				}
 			}
 			{
-				goto IL_00af;
+				goto IL_00b1;
 			}
 		}
 		catch(Il2CppExceptionWrapper& e)
@@ -8587,21 +8590,21 @@ IL_0095_1:
 		}
 	}
 
-IL_00af:
+IL_00b1:
 	{
-		int32_t L_29 = V_2;
-		V_2 = ((int32_t)il2cpp_codegen_add(L_29, 1));
+		int32_t L_32 = V_2;
+		V_2 = ((int32_t)il2cpp_codegen_add(L_32, 1));
 	}
 
-IL_00b4:
+IL_00b6:
 	{
-		int32_t L_30 = V_2;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_31 = V_1;
-		V_10 = (bool)((((int32_t)L_30) < ((int32_t)((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_31)->max_length)), 1))))? 1 : 0);
-		bool L_32 = V_10;
-		if (L_32)
+		int32_t L_33 = V_2;
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_34 = V_1;
+		V_10 = (bool)((((int32_t)L_33) < ((int32_t)((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_34)->max_length)), 1))))? 1 : 0);
+		bool L_35 = V_10;
+		if (L_35)
 		{
-			goto IL_001f;
+			goto IL_0018;
 		}
 	}
 	{

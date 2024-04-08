@@ -28,7 +28,7 @@ public class AxisLabelUpdater : MonoBehaviour
             RectTransform originalLabelRect = yAxisLabelPrefab.GetComponent<RectTransform>();
 
             // Set the new label's position to match the original label's x position
-            float yPos = step * i - (axisLength / 2); // Center the labels on the y-axis
+            float yPos = step * i - (axisLength /1.8f); // Center the labels on the y-axis
             labelRect.anchoredPosition = new Vector2(originalLabelRect.anchoredPosition.x, yPos);
 
             // Align the pivot and anchors to the middle left, similar to the original label
@@ -41,5 +41,5 @@ public class AxisLabelUpdater : MonoBehaviour
 
 
 
-    // You can create a similar function for the X-Axis if needed.
+
 }
